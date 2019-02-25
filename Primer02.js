@@ -14,7 +14,7 @@ http.createServer(function(req, res){ // http.createServer([requestListener])
     var deli = req.url.split("/"); // razdelimo url glede na znak "/"
     var operator = parseInt(deli[1],10); // 10 osnova številskega sistema, dacimalno (od 2 do 36)
         
-    if (operator == 0) {
+        if (operator == 0) {
         console.log("Izključevanje LED1");
         board.digitalWrite(13, board.LOW);
     }
@@ -31,16 +31,6 @@ http.createServer(function(req, res){ // http.createServer([requestListener])
     if (operator == 3) {
         console.log("Vključevanje LED2");
         board.digitalWrite(8, board.HIGH);
-    }     
-    if (operator == 4) {
-        console.log("Vključevanje obeh");
-        board.digitalWrite(8, board.HIGH);
-        board.digitalWrite(13, board.HIGH);
-    }     
-    if (operator == 5) {
-        console.log("Izključevanje obeh");
-        board.digitalWrite(8, board.LOW);
-        board.digitalWrite(13, board.HIGH);
     }     
         
     res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
