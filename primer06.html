@@ -12,6 +12,13 @@
 <br>
 <button id="gumbPrižgi2" onClick="prižgi2()">Prižgi Rdeco</button>
 <button id="gumbUgasni2" onClick="ugasni2()">Ugasni Rdeco</button>
+<br>
+
+<button id="gumbPrižgi3" onClick="prižgi3()">Prižgi Zeleno</button>
+<button id="gumbUgasni3" onClick="ugasni3()">Ugasni Zeleno</button>
+<br>
+<button id="gumbPrižgi4" onClick="prižgi4()">Prižgi Rdeco</button>
+<button id="gumbUgasni4" onClick="ugasni4()">Ugasni Rdeco</button>
 
 <br>
 
@@ -19,6 +26,8 @@
 
 <script type="text/javascript">
 var socket = io.connect("192.168.1.102:8080"); // povez. prek vtičnika
+var socket2 = io.connect("192.168.1.105:8080"); // povez. prek vtičnika soseda
+
 function prižgi1 () {
     socket.emit("ukazArduinu", 1); // na strežnik pošljem 1
 }
@@ -30,6 +39,20 @@ function prižgi2 () {
 }
 function ugasni2 () {
     socket.emit("ukazArduinu", 3); // na strežnik pošljem 0
+}
+//sosed
+
+function prižgi3 () {
+    socket2.emit("ukazArduinu", 1); // na strežnik pošljem 1
+}
+function ugasni3 () {
+    socket2.emit("ukazArduinu", 0); // na strežnik pošljem 0
+}
+function prižgi4 () {
+    socket2.emit("ukazArduinu", 2); // na strežnik pošljem 0
+}
+function ugasni4 () {
+    socket2.emit("ukazArduinu", 3); // na strežnik pošljem 0
 }
 </script>
     
