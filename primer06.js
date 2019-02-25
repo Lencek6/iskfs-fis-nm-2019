@@ -39,20 +39,3 @@ io.sockets.on("connection", function(socket) {
         }
     });
 });
-//sosed
-io.sockets.on("connection", function(socket2) {
-    socket2.on("ukazArduinu", function(štUkaza) {
-        if (štUkaza == "1") {
-            board.digitalWrite(13, board.HIGH); // zapišemo +5V na p. 13
-        }
-        if (štUkaza == "0") {
-            board.digitalWrite(13, board.LOW); // zapišemo 0V na pin13
-        }
-        if (štUkaza == "2") {
-            board.digitalWrite(8, board.HIGH); // zapišemo +5V na pin8
-        }
-        if (štUkaza == "3") {
-            board.digitalWrite(8, board.LOW); // zapišemo 0V na pin8
-        }
-    });
-});
