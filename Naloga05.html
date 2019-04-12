@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<meta charset = utf8>
+<html>
+
+<head>
+    <title>Primer s tipko</title>
+</head>
+
+<body>
+
+<div id="divZaIzpis"></div>
+<div id="square"></div>
+<br>
+
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<script type="text/javascript">
+"use strict"; // za uporabo razredov ("class")
+
+
+//variabli smer in deluje, ki jih klient prejme ob spremembi stanj na pinih arduina
+    var deluje = 0;
+    var smer = 1;
+    const square = document.getElementById("square");
+//spremembe kvadrata glede na spremembe spremenljivk
+    if((smer == 0 || smer == 1) && deluje == 0){
+        square.innerHTML = "motor ne deluje";
+    }
+    if(smer == 0 && deluje == 1){
+        square.innerHTML = "vrtenje v desno";
+        square.style.backgroundColor="red";
+    }
+    if(smer == 1 && deluje == 1){
+        square.innerHTML = "vrtenje v levo";
+        square.style.backgroundColor="blue";
+    }
+
+var divZaIzpis = document.getElementById("divZaIzpis");
+// spremenljivka za izpis sporočil
+
+function log(sporočilo) {
+    return "<div>" + sporočilo + "</div>";
+}
+
+divZaIzpis.innerHTML += log("Pritisnite tipko na vezju");
+
+var socket = io.connect("192.168.1.102:8080"); // povezava preko vtičnika
+
+socket.on("sporočiloKlientu", function (sporočilo){
+    divZaIzpis.innerHTML += log(sporočilo); // dodamo sporočilo
+});
+
+//posodobitev spremenljiv 
+socket.on("posodobitevStanj", function (value1,value2){
+    smer = value1;
+    deluje = value2;
+});
+
+</script>
+    
+</body>
+    
+</html>
+
+<style>
+        #square{
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            }
+    </style>
